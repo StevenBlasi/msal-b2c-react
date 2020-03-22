@@ -53,7 +53,7 @@ function authCallback(errorDesc, token, error, tokenType) {
 
 function redirect() {
   const localMsalApp = window.msal;
-  const instance = appConfig.instance ? appConfig.instance : 'https://login.microsoftonline.com/tfp/';
+  const instance = appConfig.instance;
   const authority = `${instance}${appConfig.tenant}/${appConfig.resetPolicy}`;
   localMsalApp.authority = authority;
   loginAndAcquireToken();
@@ -135,8 +135,8 @@ function loginAndAcquireToken(successCallback) {
 const authentication = {
     initialize: (config) => {
       appConfig = config;
-      const instance = config.instance ? config.instance : 'https://login.microsoftonline.com/tfp/';
-      const authority = `${instance}${config.tenant}/${config.signInPolicy}`;
+      const instance = config.instance;
+      const authority = `${config.instance}/${config.tenant}/oauth2/v2.0/authorize?p=${config.signInPolicy}`
       const validateAuthority = (config.validateAuthority != null) ? config.validateAuthority : true;
       let scopes = config.scopes;
       if (!scopes || scopes.length === 0) {
