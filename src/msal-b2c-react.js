@@ -54,7 +54,7 @@ function authCallback(errorDesc, token, error, tokenType) {
 function redirect() {
   const localMsalApp = window.msal;
   const instance = appConfig.instance;
-  const authority = `${instance}${appConfig.tenant}/${appConfig.resetPolicy}`;
+  const authority = `${instance}/${appConfig.tenant}/${appConfig.resetPolicy}`;
   localMsalApp.authority = authority;
   loginAndAcquireToken();
 }
@@ -133,80 +133,80 @@ function loginAndAcquireToken(successCallback) {
 }
 
 const authentication = {
-    initialize: (config) => {
-      appConfig = config;
-      const instance = config.instance;
-      const authority = `${config.instance}/${config.tenant}/oauth2/v2.0/authorize?p=${config.signInPolicy}`
-      const validateAuthority = (config.validateAuthority != null) ? config.validateAuthority : true;
-      let scopes = config.scopes;
-      if (!scopes || scopes.length === 0) {
-        console.log('To obtain access tokens you must specify one or more scopes. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-access-tokens');
-        state.noScopes = true;
-      }
-      state.scopes = scopes;
-
-      new Msal.UserAgentApplication(
-        config.applicationId,
-        authority,
-        authCallback, {
-          logger: logger,
-          cacheLocation: config.cacheLocation,
-          postLogoutRedirectUri: config.postLogoutRedirectUri,
-          redirectUri: config.redirectUri,
-          validateAuthority: validateAuthority
-        }
-      );
-    },
-    run: (launchApp, errorApp) => {
-      state.launchApp = launchApp
-      if (errorApp)
-        state.errorApp = errorApp;
-      if (!window.msal.isCallback(window.location.hash) && window.parent === window && !window.opener) {
-        loginAndAcquireToken();
-      }
-    },
-    required: (WrappedComponent, renderLoading) => {
-      return class extends React.Component {
-          constructor(props) {
-            super(props);
-            this.state = {
-              signedIn: false,
-              error: null,
-            };
-          }
-
-          componentWillMount() {
-            loginAndAcquireToken(() => {
-              this.setState({
-                ...this.state,
-                signedIn: true
-              });
-            });
-          };
-
-          render() {
-            if (this.state.signedIn) {
-              return ( < WrappedComponent {
-                  ...this.props
-                }
-                />);
-              };
-              return typeof renderLoading === 'function' ? renderLoading() : null;
-            };
-          };
-        },
-        signOut: () => {
-          window.msal.logout()
-        },
-        getIdToken: () => {
-          return state.idToken;
-        },
-        getAccessToken: () => {
-          return state.accessToken;
-        },
-        getUserName: () => {
-          return state.userName;
-        }
+  initialize: (config) => {
+    appConfig = config;
+    const instance = config.instance;
+    const authority = `${instance}/${config.tenant}/oauth2/v2.0/authorize?p=${config.signInPolicy}`
+    const validateAuthority = (config.validateAuthority != null) ? config.validateAuthority : true;
+    let scopes = config.scopes;
+    if (!scopes || scopes.length === 0) {
+      console.log('To obtain access tokens you must specify one or more scopes. See https://docs.microsoft.com/en-us/azure/active-directory-b2c/active-directory-b2c-access-tokens');
+      state.noScopes = true;
     }
+    state.scopes = scopes;
 
-    export default authentication;
+    new Msal.UserAgentApplication(
+      config.applicationId,
+      authority,
+      authCallback,
+      {
+        logger: logger,
+        cacheLocation: config.cacheLocation,
+        postLogoutRedirectUri: config.postLogoutRedirectUri,
+        redirectUri: config.redirectUri,
+        validateAuthority: validateAuthority
+      }
+    );
+  },
+  run: (launchApp, errorApp) => {
+    state.launchApp = launchApp;
+    if (errorApp) {
+      state.errorApp = errorApp;
+    }
+    if (!window.msal.isCallback(window.location.hash) && window.parent === window && !window.opener) {
+      loginAndAcquireToken();
+    }
+  },
+  required: (WrappedComponent, renderLoading) => {
+    return class extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          signedIn: false,
+          error: null
+        };
+      }
+
+      componentWillMount() {
+        loginAndAcquireToken(() => {
+          this.setState({
+            ...this.state,
+            signedIn: true
+          });
+        });
+      };
+
+      render() {
+        if (this.state.signedIn) {
+          return <WrappedComponent {...this.props} />;
+        }
+
+        return typeof renderLoading === 'function' ? renderLoading() : null;
+      };
+    };
+  },
+  signOut: () => {
+    window.msal.logout()
+  },
+  getIdToken: () => {
+    return state.idToken;
+  },
+  getAccessToken: () => {
+    return state.accessToken;
+  },
+  getUserName: () => {
+    return state.userName;
+  }
+}
+
+export default authentication;
