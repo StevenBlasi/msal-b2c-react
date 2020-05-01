@@ -1,6 +1,6 @@
 # README
 
-Azure AD B2C is a identity provider covering social and enterprise logins.
+Azure AD B2C is an identity provider covering social and enterprise logins.
 
 The Microsoft Authentication library (MSAL) is JavaScript library to authenticate enterprise users using Microsoft Azure Active Directory (AAD), Microsoft account users (MSA), users using social identity providers like Facebook, Google, LinkedIn etc. and get access to Microsoft Cloud or Microsoft Graph.
 
@@ -10,21 +10,21 @@ This module is React wrapper over MSAL for Azure AD B2C. It fully supports activ
 
 If you are using npm:
 
-    npm install @kdpw/msal-b2c-react --save
+    npm install @creativware/msal-b2c-react --save
 
 Or if you are using yarn:
 
-    yarn add @kdpw/msal-b2c-react
+    yarn add @creativware/msal-b2c-react
 
 ## Initializing the Library
 
 You'll first need to load the module and pass some configuration to the library. Normally this would go in your index.js file:
 
-    import authentication from '@kdpw/msal-b2c-react';
+    import authentication from '@creativware/msal-b2c-react';
 
     authentication.initialize({
-        // you can user your b2clogin.com domain here, setting is optional, will default to this
-        instance: 'https://login.microsoftonline.com/tfp/', 
+        // use your b2clogin.com domain here
+        instance: 'https://yourdomain.b2clogin.com/tfp/', 
         // your B2C tenant, you can also user tenants GUID here
         tenant: 'myb2ctenant.onmicrosoft.com',
         // the policy to use to sign in, can also be a sign up or sign in policy
@@ -61,7 +61,7 @@ If you want to set things up so that a user is authenticated as soon as they hit
 If you want to set things up so that a user is authenticated as they visit a part of the application that requires authentication then the appropriate components can be wrapped inside higher order components that will handle the authentication process. This is done using the _authentication.required_ function, normally in conjunction with a router. The example below shows this using the popular react-router:
 
     import React, { Component } from 'react';
-    import authentication from '@kdpw/msal-b2c-react'
+    import authentication from '@creativware/msal-b2c-react'
     import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
     import HomePage from './Homepage'
     import MembersArea from './MembersArea'
@@ -83,7 +83,7 @@ If you want to set things up so that a user is authenticated as they visit a par
 
 Simply call the method _getIdToken_:
 
-    import authentication from '@kdpw/msal-b2c-react'
+    import authentication from '@creativware/msal-b2c-react'
 
     // ...
 
@@ -93,7 +93,7 @@ Simply call the method _getIdToken_:
 
 Simply call the method _getAccessToken_:
 
-    import authentication from '@kdpw/msal-b2c-react'
+    import authentication from '@creativware/msal-b2c-react'
 
     // ...
 
@@ -103,7 +103,7 @@ Simply call the method _getAccessToken_:
 
 Simply call the method _getUserName_:
 
-    import authentication from '@kdpw/msal-b2c-react'
+    import authentication from '@creativware/msal-b2c-react'
 
     // ...
 
@@ -113,7 +113,7 @@ Simply call the method _getUserName_:
 
 To sign out:
 
-    import authentication from '@kdpw/msal-b2c-react'
+    import authentication from '@creativware/msal-b2c-react'
 
     // ...
 
@@ -121,4 +121,4 @@ To sign out:
 
 ## Thanks
 
-To build this I made fork of [react-azure-adb2c](https://github.com/JamesRandall/react-azure-adb2c) module. Thanks!
+To build this I made fork of [leszekczajka/react-azure-adb2c](https://github.com/leszekczajka/react-azure-adb2c) module. Thanks!
