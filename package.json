@@ -1,6 +1,6 @@
 {
-  "name": "@kdpw/msal-b2c-react",
-  "version": "0.0.3",
+  "name": "@creativware/msal-b2c-react",
+  "version": "1.0.0",
   "description": "React wrapper over MS Authentication library for Azure AD B2C",
   "main": "lib/msal-b2c-react.js",
   "scripts": {
@@ -12,17 +12,18 @@
     "url": "git+https://github.com/leszekczajka/msal-b2c-react.git"
   },
   "keywords": [
+    "msal",
     "react",
+    "reactjs",
     "js",
     "AAD",
     "B2C",
     "oauth",
-    "azure",
-    "msal"
+    "azure"
   ],
-  "author": "James Randall",
+  "author": "Steven Blasi",
   "contributors": [
-    "Leszek Czajka <leszek.czajka@gmail.com>"
+    "Steven Blasi <steven.blasi@creativware.net>"
   ],
   "license": "MIT",
   "bugs": {
@@ -33,7 +34,7 @@
     "msal": "^0.2.3"
   },
   "peerDependencies": {
-    "react": "^15.0.0 || ^16.0.0"
+    "react": "^16.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -44,14 +45,15 @@
     "babel-plugin-import": "^1.2.1",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.1",
-    "babel-runtime": "6.23.0",
     "babel-preset-react-app": "^3.0.0",
+    "babel-runtime": "6.23.0",
     "cross-env": "^5.1.4",
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-defaults": "^9.0.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.5.1"
+    "eslint-plugin-react": "^7.5.1",
+    "typescript": "^3.9.3"
   }
 }

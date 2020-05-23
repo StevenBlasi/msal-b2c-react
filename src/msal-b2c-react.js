@@ -8,35 +8,35 @@ const logger = new Msal.Logger(loggerCallback, {
   level: Msal.LogLevel.Warning
 });
 const state = {
-  noScopes: false,
-  launchApp: null,
-  idToken: null,
-  accessToken: null,
-  userName: ""
-}
-var appConfig = {
-  // optional, will default to 'https://login.microsoftonline.com/tfp/'
-  instance: null,
-  // your B2C tenant
-  tenant: null,
-  // the policy to use to sign in, can also be a sign up or sign in policy
-  signInPolicy: null,
-  // the policy to use for password reset
-  resetPolicy: null,
-  // the the B2C application you want to authenticate with
-  applicationId: null,
-  // where MSAL will store state - localStorage or sessionStorage
-  cacheLocation: null,
-  // optional, the scopes you want included in the access token
-  scopes: [],
-  // optional, the redirect URI - if not specified MSAL will pick up the location from window.href
-  redirectUri: null,
-  // optional, the URI to redirect to after logout
-  postLogoutRedirectUri: null,
-  // optional, default to true, set to false if you change instance
-  validateAuthority: null,
-  // optional, default to false, set to true if you want to acquire token silently and avoid redirections to login page
-  silentLoginOnly: false
+    noScopes: false,
+    launchApp: null,
+    idToken: null,
+    accessToken: null,
+    userName: ""
+};
+let appConfig = {
+    // optional, will default to 'https://login.microsoftonline.com/tfp/'
+    instance: null,
+    // your B2C tenant
+    tenant: null,
+    // the policy to use to sign in, can also be a sign up or sign in policy
+    signInPolicy: null,
+    // the policy to use for password reset
+    resetPolicy: null,
+    // the the B2C application you want to authenticate with
+    applicationId: null,
+    // where MSAL will store state - localStorage or sessionStorage
+    cacheLocation: null,
+    // optional, the scopes you want included in the access token
+    scopes: [],
+    // optional, the redirect URI - if not specified MSAL will pick up the location from window.href
+    redirectUri: null,
+    // optional, the URI to redirect to after logout
+    postLogoutRedirectUri: null,
+    // optional, default to true, set to false if you change instance
+    validateAuthority: null,
+    // optional, default to false, set to true if you want to acquire token silently and avoid redirections to login page
+    silentLoginOnly: false
 };
 
 function loggerCallback(logLevel, message, piiLoggingEnabled) {
